@@ -1,81 +1,16 @@
-# Clasificados Pro 📱
+# GitHub Pages
 
-App móvil de clasificados hiper-local para Guadalajara, Jalisco. Flutter + Firebase.
+<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
 
-## Características
+Hey @ventanas2000!
 
-- **4 categorías**: Servicios, Transporte/Personal, Bienes/Activos, Empleos
-- **Ubicación híbrida**: GPS automático + navegación manual (País → Estado → Ciudad)
-- **Wizard de 3 pasos** para publicar anuncios
-- **Modelo freemium**: primer anuncio gratis, Bump Ads, Suscripción Pro
-- **Expiración inteligente**: Servicios 60 días, Transporte 30 días, Bienes 20 días, Empleos 20 días
+Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
 
-## Stack Tecnológico
+Remember, it's self-paced so feel free to take a break! ☕️
 
-| Capa | Tecnología |
-|------|-----------|
-| Frontend | Flutter (Dart) |
-| Estado | Provider |
-| Auth | Firebase Auth (email + Google) |
-| Base de datos | Cloud Firestore |
-| Almacenamiento | Cloud Storage |
-| Notificaciones | Firebase Cloud Messaging |
-| Pagos | Stripe / RevenueCat (pendiente) |
-| Analytics | Firebase Analytics + Crashlytics |
+[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/ventanas2000/clasificados-pro/issues/8)
 
-## Estructura del Proyecto
+---
 
-```
-clasificados_pro_app/
-├── lib/
-│   ├── main.dart                    # Punto de entrada
-│   ├── models/
-│   │   ├── ad_model.dart            # Modelo de anuncio
-│   │   └── taxonomy.dart            # Categorías y subcategorías
-│   ├── providers/
-│   │   └── app_state_provider.dart  # Estado global (Provider)
-│   ├── screens/
-│   │   ├── home_screen.dart         # Feed principal
-│   │   ├── create_ad_wizard.dart    # Controlador del wizard
-│   │   ├── category_selection_screen.dart
-│   │   ├── ad_details_screen.dart
-│   │   └── location_contact_screen.dart
-│   └── widgets/
-│       └── ad_card.dart             # Tarjeta de anuncio
-├── pubspec.yaml
-└── README.md
-```
+&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
 
-## Desarrollo
-
-```bash
-# Instalar dependencias
-flutter pub get
-
-# Ejecutar en modo desarrollo
-flutter run
-
-# Ejecutar tests
-flutter test
-
-# Build para producción
-flutter build apk --release
-flutter build ios --release
-```
-
-## Roadmap
-
-- [x] Estructura base del proyecto
-- [x] Modelos de datos
-- [x] Pantallas principales
-- [ ] Firebase Auth (email + Google)
-- [ ] Cloud Firestore (anuncios reales)
-- [ ] Cloud Storage (fotos)
-- [ ] Sistema de pagos (Stripe/RevenueCat)
-- [ ] Notificaciones push
-- [ ] Expiración automática
-- [ ] Analytics y monitoreo
-
-## Licencia
-
-MIT
