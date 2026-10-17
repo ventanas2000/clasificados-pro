@@ -1,48 +1,81 @@
-# GitHub Pages
+# Clasificados Pro 📱
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+App móvil de clasificados hiper-local para Guadalajara, Jalisco. Flutter + Firebase.
 
-## Welcome
+## Características
 
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
+- **4 categorías**: Servicios, Transporte/Personal, Bienes/Activos, Empleos
+- **Ubicación híbrida**: GPS automático + navegación manual (País → Estado → Ciudad)
+- **Wizard de 3 pasos** para publicar anuncios
+- **Modelo freemium**: primer anuncio gratis, Bump Ads, Suscripción Pro
+- **Expiración inteligente**: Servicios 60 días, Transporte 30 días, Bienes 20 días, Empleos 20 días
 
-- **How long**: This exercise takes less than one hour to complete.
+## Stack Tecnológico
 
-In this exercise, you will:
+| Capa | Tecnología |
+|------|-----------|
+| Frontend | Flutter (Dart) |
+| Estado | Provider |
+| Auth | Firebase Auth (email + Google) |
+| Base de datos | Cloud Firestore |
+| Almacenamiento | Cloud Storage |
+| Notificaciones | Firebase Cloud Messaging |
+| Pagos | Stripe / RevenueCat (pendiente) |
+| Analytics | Firebase Analytics + Crashlytics |
 
-1. Enable GitHub Pages
-1. Configure your site
-1. Customize your home page
-1. Create a blog post
-1. Merge your pull request
+## Estructura del Proyecto
 
+```
+clasificados_pro_app/
+├── lib/
+│   ├── main.dart                    # Punto de entrada
+│   ├── models/
+│   │   ├── ad_model.dart            # Modelo de anuncio
+│   │   └── taxonomy.dart            # Categorías y subcategorías
+│   ├── providers/
+│   │   └── app_state_provider.dart  # Estado global (Provider)
+│   ├── screens/
+│   │   ├── home_screen.dart         # Feed principal
+│   │   ├── create_ad_wizard.dart    # Controlador del wizard
+│   │   ├── category_selection_screen.dart
+│   │   ├── ad_details_screen.dart
+│   │   └── location_contact_screen.dart
+│   └── widgets/
+│       └── ad_card.dart             # Tarjeta de anuncio
+├── pubspec.yaml
+└── README.md
+```
 
-### How to start this exercise
+## Desarrollo
 
-Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
+```bash
+# Instalar dependencias
+flutter pub get
 
-[![](https://img.shields.io/badge/Copy%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=skills&template_name=github-pages&owner=%40me&name=skills-github-pages&description=Exercise:+Create+a+site+or+blog+from+your+GitHub+repositories+with+GitHub+Pages&visibility=public)
+# Ejecutar en modo desarrollo
+flutter run
 
-<details>
-<summary>Having trouble? 🤷</summary><br/>
+# Ejecutar tests
+flutter test
 
-When copying the exercise, we recommend the following settings:
+# Build para producción
+flutter build apk --release
+flutter build ios --release
+```
 
-- For owner, choose your personal account or an organization to host the repository.
+## Roadmap
 
-- We recommend creating a public repository, since private repositories will use Actions minutes.
+- [x] Estructura base del proyecto
+- [x] Modelos de datos
+- [x] Pantallas principales
+- [ ] Firebase Auth (email + Google)
+- [ ] Cloud Firestore (anuncios reales)
+- [ ] Cloud Storage (fotos)
+- [ ] Sistema de pagos (Stripe/RevenueCat)
+- [ ] Notificaciones push
+- [ ] Expiración automática
+- [ ] Analytics y monitoreo
 
-If the exercise isn't ready in 20 seconds, please check the [Actions](../../actions) tab.
+## Licencia
 
-- Check to see if a job is running. Sometimes it simply takes a bit longer.
-
-- If the page shows a failed job, please submit an issue. Nice, you found a bug! 🐛
-
-</details>
-
----
-
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+MIT
