@@ -4,6 +4,7 @@ import '../providers/app_state_provider.dart';
 import '../models/ad_model.dart';
 import 'ad_detail_screen.dart';
 import 'create_ad_wizard.dart';
+import 'city_selector_screen.dart';
 
 /// Pantalla principal con el feed de anuncios
 class HomeScreen extends StatefulWidget {
@@ -29,14 +30,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Clasificados Pro'),
+        title: Consumer<AppStateProvider>(
+          builder: (context, provider, child) {
+            final city = provider.selectedCity;
+            return Text(city.isEmpty ? 'Clasificados Pro' : 'Clasificados Pro · $city');
+          },
+        ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: const Icon(Icons.location_on),
-            onPressed: () => _showLocationDialog(),
-            tooltip: 'Ubicación',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const CitySelectorScreen()),
+              );
+            },
+            tooltip: 'Ciudad',
           ),
           IconButton(
             icon: const Icon(Icons.search),

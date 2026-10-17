@@ -6,6 +6,8 @@ class AppStateProvider with ChangeNotifier {
   UserModel? _currentUser;
   List<AdModel> _ads = [];
   LocationModel? _currentLocation;
+  String _selectedCity = '';
+  String _selectedMetroArea = '';
   bool _isLoading = false;
   String _searchQuery = '';
   MainCategory? _selectedCategory;
@@ -16,14 +18,23 @@ class AppStateProvider with ChangeNotifier {
   UserModel? get currentUser => _currentUser;
   List<AdModel> get ads => _filteredAds;
   LocationModel? get currentLocation => _currentLocation;
+  String get selectedCity => _selectedCity;
+  String get selectedMetroArea => _selectedMetroArea;
   bool get isLoading => _isLoading;
   String get searchQuery => _searchQuery;
   MainCategory? get selectedCategory => _selectedCategory;
   bool get useAutoLocation => _useAutoLocation;
 
-  // Filtrado de anuncios basado en búsqueda y categoría
+  // Filtrado de anuncios basado en búsqueda, categoría y área metropolitana
   List<AdModel> get _filteredAds {
     var filtered = _ads;
+    
+    // Filtro por área metropolitana (ciudad seleccionada)
+    if (_selectedMetroArea.isNotEmpty) {
+      filtered = filtered.where((ad) => 
+        ad.metroArea == _selectedMetroArea
+      ).toList();
+    }
     
     if (_selectedCategory != null) {
       filtered = filtered.where((ad) => 
@@ -61,6 +72,12 @@ class AppStateProvider with ChangeNotifier {
   void setLocation(LocationModel location, {bool useAuto = true}) {
     _currentLocation = location;
     _useAutoLocation = useAuto;
+    notifyListeners();
+  }
+
+  void setSelectedCity(String city, String metroArea) {
+    _selectedCity = city;
+    _selectedMetroArea = metroArea;
     notifyListeners();
   }
 
@@ -120,6 +137,7 @@ class AppStateProvider with ChangeNotifier {
         country: 'México',
         state: 'Jalisco',
         city: 'Guadalajara',
+        metroArea: 'Guadalajara',
         latitude: 20.6597,
         longitude: -103.3496,
         createdAt: DateTime.now().subtract(const Duration(hours: 2)),
@@ -141,6 +159,7 @@ class AppStateProvider with ChangeNotifier {
         country: 'México',
         state: 'Jalisco',
         city: 'Guadalajara',
+        metroArea: 'Guadalajara',
         latitude: 20.6700,
         longitude: -103.3500,
         createdAt: DateTime.now().subtract(const Duration(hours: 5)),
@@ -163,6 +182,7 @@ class AppStateProvider with ChangeNotifier {
         country: 'México',
         state: 'Jalisco',
         city: 'Zapopan',
+        metroArea: 'Guadalajara',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
         expiresAt: DateTime.now().add(const Duration(days: 18)),
         imageUrls: [],

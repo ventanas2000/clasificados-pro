@@ -15,6 +15,7 @@ class AdModel {
   final String country;
   final String state;
   final String city;
+  final String metroArea; // Área metropolitana (ej: "Guadalajara" para ZMG)
   final double? latitude;
   final double? longitude;
   
@@ -46,6 +47,7 @@ class AdModel {
     required this.country,
     required this.state,
     required this.city,
+    this.metroArea = '',
     this.latitude,
     this.longitude,
     required this.createdAt,
@@ -73,6 +75,7 @@ class AdModel {
       country: json['country'] ?? '',
       state: json['state'] ?? '',
       city: json['city'] ?? '',
+      metroArea: json['metro_area'] ?? '',
       latitude: json['latitude']?.toDouble(),
       longitude: json['longitude']?.toDouble(),
       createdAt: DateTime.parse(json['created_at']),
@@ -101,6 +104,7 @@ class AdModel {
       'country': country,
       'state': state,
       'city': city,
+      'metro_area': metroArea,
       'latitude': latitude,
       'longitude': longitude,
       'created_at': createdAt.toIso8601String(),
@@ -132,11 +136,12 @@ enum MainCategory {
   const MainCategory(this.displayName, this.subcategories);
 }
 
-/// Modelo para Ubicación Jerárquica
+/// Modelo para Ubicación Jerárquica con área metropolitana
 class LocationModel {
   final String country;
   final String state;
   final String city;
+  final String metroArea;
   final double? latitude;
   final double? longitude;
 
@@ -144,11 +149,13 @@ class LocationModel {
     required this.country,
     required this.state,
     required this.city,
+    this.metroArea = '',
     this.latitude,
     this.longitude,
   });
 
   String get fullAddress => '$city, $state, $country';
+  String get displayMetro => metroArea.isNotEmpty ? metroArea : city;
 }
 
 /// Modelo de Usuario

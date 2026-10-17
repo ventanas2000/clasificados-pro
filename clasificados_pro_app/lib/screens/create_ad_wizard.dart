@@ -93,9 +93,9 @@ class _CreateAdWizardState extends State<CreateAdWizard> {
           return false;
         }
         if (_selectedLocationMode == 'manual') {
-          if (_cityController.text.trim().isEmpty || 
+          if (_cityController.text.trim().isEmpty ||
               _stateController.text.trim().isEmpty) {
-            _showError('Ciudad y estado son obligatorios en modo manual');
+            _showError('Selecciona tu ciudad o ingresa ciudad y estado manualmente');
             return false;
           }
         }

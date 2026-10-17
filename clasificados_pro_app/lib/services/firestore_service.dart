@@ -128,6 +128,7 @@ class FirestoreService {
         'country': ad.country,
         'state': ad.state,
         'city': ad.city,
+        'metro_area': ad.metroArea,
         'latitude': ad.latitude,
         'longitude': ad.longitude,
         'created_at': FieldValue.serverTimestamp(),
@@ -175,6 +176,7 @@ class FirestoreService {
         'country': ad.country,
         'state': ad.state,
         'city': ad.city,
+        'metro_area': ad.metroArea,
         'latitude': ad.latitude,
         'longitude': ad.longitude,
         'is_pro': ad.isPro,
@@ -220,7 +222,41 @@ class FirestoreService {
         .map(_mapQuerySnapshotToAds);
   }
 
-  /// Stream de anuncios filtrados por categoría.
+  /// Stream de anuncios filtrados por área metropolitana.
+  ///
+  /// [metroArea] coincide con el campo `metro_area` en Firestore.
+  /// Si está vacío, retorna todos los anuncios activos.
+  Stream<List<AdModel>> getAdsByMetroArea(String metroArea) {
+    if (metroArea.isEmpty) {
+      return getAds();
+    }
+    return _adsRef
+        .where('is_expired', isEqualTo: false)
+        .where('metro_area', isEqualTo: metroArea)
+        .orderBy('created_at', descending: true)
+        .snapshots()
+        .map(_mapQuerySnapshotToAds);
+  }
+
+  /// Obtiene la lista de ciudades activas desde Firestore.
+  ///
+  /// Lee de la colección `cities` donde cada documento tiene:
+  /// name, state, country, metro_area, is_active, created_at
+  Future<List<Map<String, dynamic>>> getCities() async {
+    try {
+      final snapshot = await _db.collection('cities')
+          .where('is_active', isEqualTo: true)
+          .orderBy('state')
+          .orderBy('name')
+          .get();
+      return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    } on FirebaseException catch (e) {
+      debugPrint('[FirestoreService] Error obteniendo ciudades: ${e.code}');
+      return [];
+    }
+  }
+
+  /// Obtiene anuncios filtrados por categoría.
   ///
   /// [categoryId] coincide con el campo `category_id` en Firestore.
   Stream<List<AdModel>> getAdsByCategory(String categoryId) {
@@ -347,6 +383,7 @@ class FirestoreService {
         country: data['country'] ?? '',
         state: data['state'] ?? '',
         city: data['city'] ?? '',
+        metroArea: data['metro_area'] ?? '',
         latitude: data['latitude']?.toDouble(),
         longitude: data['longitude']?.toDouble(),
         createdAt: createdAt,
