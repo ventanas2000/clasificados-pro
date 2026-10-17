@@ -31,4 +31,13 @@ flutter_export_environment.sh
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Firebase
+firebase-debug.log
+firebase-debug.*.log
+.firebaserc
+
+# Secrets
+google-services.json
+GoogleService-Info.plist
 ```
