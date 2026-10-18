@@ -128,7 +128,7 @@ enum MainCategory {
   servicios('Servicios', ['Plomeros', 'Electricistas', 'Limpieza', 'Reparaciones']),
   transporte('Transporte y Personal', ['Choferes', 'Mensajería', 'Ayudantes', 'Fletes']),
   bienes('Bienes y Activos', ['Autos', 'Inmuebles', 'Muebles', 'Electrónica']),
-  empleos('Empleos y Wanted', ['Ofertas de Empleo', 'Busco Trabajo']);
+  empleos('Empleos y Se Busca', ['Ofertas de Empleo', 'Busco Trabajo']);
 
   final String displayName;
   final List<String> subcategories;
