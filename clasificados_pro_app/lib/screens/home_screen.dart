@@ -365,15 +365,16 @@ class _AdCard extends StatelessWidget {
             Stack(
               children: [
                 ad.primaryImageUrl.isNotEmpty
-                    ? Image.network(
-                        ad.primaryImageUrl,
-                        height: 180,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => Container(
-                          height: 180,
-                          color: Colors.grey[300],
-                          child: const Icon(Icons.image_not_supported, size: 50),
+                    ? AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Image.network(
+                          ad.primaryImageUrl,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Container(
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.image_not_supported, size: 50),
+                          ),
                         ),
                       )
                     : Container(

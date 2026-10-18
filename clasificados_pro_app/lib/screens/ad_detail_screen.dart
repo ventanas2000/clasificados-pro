@@ -34,8 +34,8 @@ class AdDetailScreen extends StatelessWidget {
         children: [
           // Galería de imágenes
           if (ad.imageUrls.isNotEmpty)
-            SizedBox(
-              height: 300,
+            AspectRatio(
+              aspectRatio: 4 / 3,
               child: PageView.builder(
                 itemCount: ad.imageUrls.length,
                 itemBuilder: (context, index) {
@@ -51,10 +51,12 @@ class AdDetailScreen extends StatelessWidget {
               ),
             )
           else
-            Container(
-              height: 300,
-              color: Colors.grey[300],
-              child: const Icon(Icons.store, size: 100),
+            AspectRatio(
+              aspectRatio: 4 / 3,
+              child: Container(
+                color: Colors.grey[300],
+                child: const Icon(Icons.store, size: 100),
+              ),
             ),
           
           // Información principal

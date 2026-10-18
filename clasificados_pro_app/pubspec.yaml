@@ -54,6 +54,12 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.1
 
+# geolocator_android 4.6.2 falla al compilar con Flutter 3.26
+# ("compileSdkVersion is not specified"). 4.6.1 no depende de
+# flutter.compileSdkVersion y compila correctamente.
+dependency_overrides:
+  geolocator_android: 4.6.1
+
 flutter:
   uses-material-design: true
   

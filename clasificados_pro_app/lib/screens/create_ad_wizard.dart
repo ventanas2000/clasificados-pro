@@ -271,50 +271,52 @@ class _CreateAdWizardState extends State<CreateAdWizard> {
         const SizedBox(height: 24),
         
         // Categorías principales
-        ...MainCategory.values.map((category) => 
-          Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            elevation: _selectedMainCategory == category ? 4 : 2,
-            color: _selectedMainCategory == category 
-                ? Colors.blue[50] 
-                : Colors.white,
-            child: ExpansionTile(
-              leading: Icon(
-                _getCategoryIcon(category),
-                color: _selectedMainCategory == category 
-                    ? Colors.blue 
-                    : Colors.grey[700],
-                size: 32,
-              ),
-              title: Text(
-                category.displayName,
-                style: TextStyle(
-                  fontWeight: _selectedMainCategory == category 
-                      ? FontWeight.bold 
-                      : FontWeight.normal,
-                  color: _selectedMainCategory == category 
-                      ? Colors.blue 
-                      : Colors.black,
+        ...MainCategory.values.map((category) =>
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedMainCategory = category;
+                _selectedSubcategory = null;
+              });
+            },
+            child: Card(
+              margin: const EdgeInsets.only(bottom: 12),
+              elevation: _selectedMainCategory == category ? 4 : 2,
+              color: _selectedMainCategory == category
+                  ? Colors.blue[50]
+                  : Colors.white,
+              child: ExpansionTile(
+                leading: Icon(
+                  _getCategoryIcon(category),
+                  color: _selectedMainCategory == category
+                      ? Colors.blue
+                      : Colors.grey[700],
+                  size: 32,
                 ),
-              ),
-              onTap: () {
-                setState(() {
-                  _selectedMainCategory = category;
-                  _selectedSubcategory = null;
-                });
-              },
-              children: category.subcategories.map((subcat) => 
-                ListTile(
-                  title: Text(subcat),
-                  selected: _selectedSubcategory == subcat,
-                  selectedTileColor: Colors.blue[100],
-                  onTap: () {
-                    setState(() {
-                      _selectedSubcategory = subcat;
-                    });
-                  },
+                title: Text(
+                  category.displayName,
+                  style: TextStyle(
+                    fontWeight: _selectedMainCategory == category
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    color: _selectedMainCategory == category
+                        ? Colors.blue
+                        : Colors.black,
+                  ),
                 ),
-              ).toList(),
+                children: category.subcategories.map((subcat) =>
+                  ListTile(
+                    title: Text(subcat),
+                    selected: _selectedSubcategory == subcat,
+                    selectedTileColor: Colors.blue[100],
+                    onTap: () {
+                      setState(() {
+                        _selectedSubcategory = subcat;
+                      });
+                    },
+                  ),
+                ).toList(),
+              ),
             ),
           ),
         ).toList(),
